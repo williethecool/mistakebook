@@ -3,7 +3,7 @@ name: Unzip and Commit to Root
 on:
   push:
     paths:
-      - 'your-archive.zip'  # <-- replace with your zip file name
+      - 'mistakebook.zip'  # <-- replace with your zip file name
 
 jobs:
   unzip:
@@ -18,7 +18,7 @@ jobs:
       # Step 2: Unzip archive into root
       - name: Unzip archive
         run: |
-          unzip -o your-archive.zip -d .   # -o overwrites files if they exist
+          unzip -o mistakebook.zip -d .   # -o overwrites files if they exist
 
       # Step 3: Commit extracted files
       - name: Commit extracted files
