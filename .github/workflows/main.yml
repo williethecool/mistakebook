@@ -3,22 +3,24 @@ name: Unzip and Commit to Root
 on:
   push:
     paths:
-      - 'mistakebook.zip'   # replace with your zip file name
+      - 'your-archive.zip'  # <-- replace with your zip file name
 
 jobs:
   unzip:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout the repo
+      # Step 1: Checkout the repo with PAT for push access
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_PAT }}  # <-- make sure you add this secret
 
       # Step 2: Unzip archive into root
       - name: Unzip archive
         run: |
-          unzip -o mistakebook.zip -d .   # -o overwrites existing files if needed
+          unzip -o your-archive.zip -d .   # -o overwrites files if they exist
 
-      # Step 3: Commit the extracted files
+      # Step 3: Commit extracted files
       - name: Commit extracted files
         run: |
           git config user.name "github-actions"
