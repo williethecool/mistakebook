@@ -1,0 +1,28 @@
+name: Unzip and Commit to Root
+
+on:
+  push:
+    paths:
+      - 'mistakebook.zip'   # replace with your zip file name
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Unzip archive into root
+      - name: Unzip archive
+        run: |
+          unzip -o mistakebook.zip -d .   # -o overwrites existing files if needed
+
+      # Step 3: Commit the extracted files
+      - name: Commit extracted files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Extract zip to root" || echo "No changes to commit"
+          git push
